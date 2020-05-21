@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* .container {
+    border: dashed;
+    border-color: #BBC7F5;
+    border-radius: 5px;
+    padding: 10px;
+    margin: auto;
+    width: 600px;
+} */
+
+#mainTitle {
+    position: relative;
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    top: 50px;
+    font-size: 42px;
+}
+
+#dateBar {
+    position: absolute;
+    top: 15%;
+    left: 75%;
+    font-size: 28px;
+}
+
+#pointsBar {
+    position: absolute;
+    top: 30%;
+    left: 75%;
+    font-size: 28px;
+    width: 200px;
+    padding: 10px 10px;;
+    border: 5px solid grey;
+}
+
+#accuracyBar {
+    position: absolute;
+    top: 40%;
+    left: 75%;
+    font-size: 28px;
+    width: 200px;
+    padding: 10px 10px;;
+    border: 5px solid grey;
+}
+
+#randomLetter {
+    position: absolute;
+    top: 35%;
+    left: 45%;
+    font-size: 500%;
+    padding: 30px 40px;
+    border: 10px solid blue;
+}
+
+button {
+    border: 0;
+    padding: 15px 20px;
+    display: inline-block;
+    border-radius: 15px;
+    color: #007aff;
+    font-size: 32px;
+    font-family: "Arial Narrow";
+    font-weight: bold;
+    background-color: #f2f2f7;
+    box-shadow: 0px 15px #007aff;
+}
+
+button:hover {
+    font-family: "Arial Narrow";
+    font-size: 32px;
+    background-color: #E8E8E8;
+}
+
+button:active {
+    
+  background-color: #8993B8;
+  box-shadow: 0 5px #8993B8;
+  transform: translateY(10px);
+}
+
+#restartButton {
+    position: absolute;
+    top: 30%;
+    left: 15%;
+}
+
+#startPauseButton {
+    position: absolute;
+    top: 50%;
+    left: 15%;
+}
+
+.directionsBox {
+    position: absolute;
+    top: 80%;
+    left: 30%;
+    width: 600px;
+    height: 75px;
+    font-size: 24px;
+    padding: 20px 70px;
+    border: 5px solid grey;
+}
