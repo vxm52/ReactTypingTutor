@@ -12,6 +12,11 @@
     width: 600px;
 } */
 
+#test {
+    position: absolute;
+    top: 30%;
+}
+
 #mainTitle {
     position: relative;
     font-family: 'Oswald', sans-serif;
