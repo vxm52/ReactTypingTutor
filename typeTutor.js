@@ -16,8 +16,7 @@ var randomLetter = Math.floor(Math.random() * 25);
 var loopyLetter = function() {
     randomLetter = Math.floor(Math.random() * 25);
     randLetterGetter = document.getElementById('randomLetter').textContent = (letterBase[randomLetter]);
-    // var randLetterIdentifier = (letterBase.indexOf(letterBase[randomLetter]));
-    console.log(`Random Number: ${randomLetter}, Random Letter: ${randLetterGetter}`);
+    //console.log(`Random Number: ${randomLetter}, Random Letter: ${randLetterGetter}`);
 }
 
 var isGameRunning = false;
@@ -26,6 +25,7 @@ var score = 0;
 //Start the game
 function startGame() 
 {
+    var speedPref = prompt('How many milliseconds do you want between each word?')
     console.log('The game has started');
     
     //Makes randomLetter visible
@@ -75,8 +75,8 @@ function startGame()
             {
                 isGameRunning = false;
             }
-        },  1000);
-        })(10);
+        },  speedPref);
+        })(15);
 };
 
 //Point display
@@ -85,16 +85,18 @@ function pointDisplay() {
 };
 
 //Keypress function + point system
+var trackerRight = 0;
+var trackerWrong = 0;
 document.addEventListener('keypress', function(event) {
     var x, keycodeLogger,
     x = event.keyCode;
     keycodeLogger = (keycodeArray.indexOf(x));
-    console.log(keycodeLogger);
 
     if (keycodeLogger === randomLetter) {
-        console.log('you score a point!');
+        //console.log('you score a point!');
         if (isGameRunning)
         {
+            trackerRight = trackerRight + 1;
             score = score + 1;
             pointDisplay();
         }
@@ -106,8 +108,14 @@ document.addEventListener('keypress', function(event) {
     } 
     else 
     {
-        console.log('You don\'t score a point');
+        trackerWrong = trackerWrong + 1;
+        score = score - 1;
+        pointDisplay();
+        //console.log('You don\'t score a point');
     }
+    var average = trackerRight/(trackerRight + trackerWrong);
+    var easyAverage = Math.floor(100 * average)
+    document.getElementById('accuracyBar').textContent = ('Accuracy: ' + easyAverage + '%');
 })
 
 //End Game button
@@ -140,12 +148,6 @@ document.getElementById("endButton").addEventListener("click", function() {
     }
 
 });
-
-
-
-
-
-
 
 //DATE DISPLAY
 var dateMaker = function() {
