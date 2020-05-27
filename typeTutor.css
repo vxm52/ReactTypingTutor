@@ -53,6 +53,7 @@
 }
 
 #randomLetter {
+    display: none; 
     position: absolute;
     top: 35%;
     left: 45%;
@@ -87,13 +88,15 @@ button:active {
   transform: translateY(10px);
 }
 
-#restartButton {
+#startButton {
+    display: block;
     position: absolute;
     top: 30%;
     left: 15%;
 }
 
-#startPauseButton {
+#endButton {
+    display: none;
     position: absolute;
     top: 50%;
     left: 15%;
