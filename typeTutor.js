@@ -1,65 +1,162 @@
-
-//LETTER BASE
-var letterBase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-
-
-// var randomLetter = Math.floor(Math.random() * 25); 
-// var randLetterGetter, randLetterIdentifier,
-// randLetterGetter = document.getElementById('randomLetter').textContent = (letterBase[randomLetter]);
-// randLetterIdentifier = (letterBase.indexOf(letterBase[randomLetter]));
-
-(function theLoop (i) {
-    setTimeout(function () {
-        var randomLetter = Math.floor(Math.random() * 25); 
-        var randLetterGetter = document.getElementById('randomLetter').textContent = (letterBase[randomLetter]);
-        var randLetterIdentifier = (letterBase.indexOf(letterBase[randomLetter]));
-      if (--i) {          // If i > 0, keep going
-        theLoop(i);       // Call the loop again, and pass it the current value of i
-      }
-    }, 2000);
-  })(15);
-
-
-
-
-
-
 //KEYCODE BASE
 var keycodeArray = [];
-
-for (keycodeNumber = 97; keycodeNumber <= 122; keycodeNumber++) {
+for (keycodeNumber = 97; keycodeNumber <= 122; keycodeNumber++)
+{
     keycodeArray.push(keycodeNumber);
+}
+
+
+//LETTER BASE
+var letterBase, gamePlaying;
+letterBase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+var randomLetter = Math.floor(Math.random() * 25);
+
+//Pulls a random letter from letter base and displays it
+var loopyLetter = function() {
+    randomLetter = Math.floor(Math.random() * 25);
+    randLetterGetter = document.getElementById('randomLetter').textContent = (letterBase[randomLetter]);
+    // var randLetterIdentifier = (letterBase.indexOf(letterBase[randomLetter]));
+    console.log(`Random Number: ${randomLetter}, Random Letter: ${randLetterGetter}`);
+}
+
+var isGameRunning = false;
+var score = 0;
+
+//Start the game
+function startGame() 
+{
+    console.log('The game has started');
+    
+    //Makes randomLetter visible
+    var rLetterMan = document.getElementById("randomLetter");
+    if (rLetterMan.style.display = "none")
+    {
+        rLetterMan.style.display = "block";
+    }
+    else
+    {
+        rLetterMan.style.display = "none";
     }
 
-var pointBank = 0;
-var pointDisplay = function() {
-    document.getElementById('pointsBar').textContent = 'Points: ' + pointBank;
+    //Makes "Start" button invisible
+    var sButtonMan = document.getElementById("startButton");
+    if (sButtonMan.style.display = "block")
+    {
+        sButtonMan.style.display = "none";
+    }
+    else
+    {
+        sButtonMan.style.display = "block";
+    }
+
+    //Makes "End Game" button visible
+    var eButtonMan = document.getElementById("endButton");
+    if (eButtonMan.style.display = "none")
+    {
+        eButtonMan.style.display = "block";
+    }
+    else
+    {
+        eButtonMan.style.display = "none";
+    }
+    isGameRunning = true;
+
+    //Displays one letter every second for a total of 15 letters
+    (function theLoop(i) {
+        setTimeout(function () {
+            if (i-- && isGameRunning) 
+            {          // If i > 0 AND isGameRunning = true, then keep going
+                loopyLetter();
+                theLoop(i);
+                     // Call the loop again, and pass it the current value of i
+            }
+            if (i <= 0)
+            {
+                isGameRunning = false;
+            }
+        },  1000);
+        })(10);
 };
 
-pointDisplay();
+//Point display
+function pointDisplay() {
+    document.getElementById('pointsBar').textContent = ('Points: ' + score);
+};
+
+//Keypress function + point system
 document.addEventListener('keypress', function(event) {
     var x, keycodeLogger,
     x = event.keyCode;
     keycodeLogger = (keycodeArray.indexOf(x));
-        
-    if (keycodeLogger === randLetterIdentifier) {
+    console.log(keycodeLogger);
+
+    if (keycodeLogger === randomLetter) {
         console.log('you score a point!');
-        pointBank = pointBank + 1;
-        pointDisplay();
-    } else {
-        console.log('You don\'t score a point');
+        if (isGameRunning)
+        {
+            score = score + 1;
+            pointDisplay();
         }
-    })
+        else //Countdown has finished (game ended)
+        {
+            console.log("Game ended. You cannot spam keys");
+        }
+        
+    } 
+    else 
+    {
+        console.log('You don\'t score a point');
+    }
+})
+
+//End Game button
+document.getElementById("endButton").addEventListener("click", function() {
+    isGameRunning = false;
+    score = 0;
+    pointDisplay();
+    console.log("isGameRunning set to: " + isGameRunning + ". Game has ended");
+
+    //Makes "Start" button visible again
+    var sButtonMan = document.getElementById("startButton");
+    if (sButtonMan.style.display = "none")
+    {
+        sButtonMan.style.display = "block";
+    }
+    else
+    {
+        sButtonMan.style.display = "none";
+    }
+
+    //Makes "End Game" button invisible again
+    var eButtonMan = document.getElementById("endButton");
+    if (eButtonMan.style.display = "block")
+    {
+        eButtonMan.style.display = "none";
+    }
+    else
+    {
+        eButtonMan.style.display = "block";
+    }
+
+});
 
 
-//Date
-var now, months, month, year, date;
+
+
+
+
+
+//DATE DISPLAY
+var dateMaker = function() {
+    var now, months, month, year, date;
     
-now = new Date();
-    
-months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-month = now.getMonth();
-date = now.getDate();
-year = now.getFullYear();
-// document.getElementById('dateBar').textContent = 'Date: ' + date + ' ' + months[month] + ' ' + year;
-document.getElementById('dateBar').textContent = `Date: ${date} ${months[month]} ${year}`;
+    now = new Date();
+        
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    month = now.getMonth();
+    date = now.getDate();
+    year = now.getFullYear();
+    // document.getElementById('dateBar').textContent = 'Date: ' + date + ' ' + months[month] + ' ' + year;
+    document.getElementById('dateBar').textContent = `Date: ${date} ${months[month]} ${year}`;
+}();
