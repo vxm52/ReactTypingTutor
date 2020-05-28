@@ -108,11 +108,19 @@ document.addEventListener('keypress', function(event) {
     } 
     else 
     {
-        trackerWrong = trackerWrong + 1;
-        score = score - 1;
-        pointDisplay();
-        //console.log('You don\'t score a point');
+         if (isGameRunning)
+        {
+            trackerWrong = trackerWrong + 1;
+            score = score - 1;
+            pointDisplay();
+            //console.log('You don\'t score a point');
+        }
+        else //Countdown has finished (game ended)
+        {
+            console.log("Game ended. You cannot spam keys");
+        }
     }
+    
     var average = trackerRight/(trackerRight + trackerWrong);
     var easyAverage = Math.floor(100 * average)
     document.getElementById('accuracyBar').textContent = ('Accuracy: ' + easyAverage + '%');
